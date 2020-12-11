@@ -1,3 +1,5 @@
+// ng generate @angular/material:address-form address-form
+
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 

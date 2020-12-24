@@ -11,13 +11,27 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-
+  smallScreen: boolean;
+  toolbarItems:boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      '(max-width: 768px)'
+        ]).subscribe(result => {
+      if (result.matches) {
+        this.smallScreen = true
+        this.toolbarItems = false
+      }
+      else{
+        this.smallScreen = false
+        this.toolbarItems = true
+      }
+    });
+  }
 
 }
